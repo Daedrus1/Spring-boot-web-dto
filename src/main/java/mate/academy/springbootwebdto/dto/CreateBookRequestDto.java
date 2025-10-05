@@ -1,7 +1,9 @@
 package mate.academy.springbootwebdto.dto;
 
 import java.math.BigDecimal;
+import lombok.Data;
 
+@Data
 public class CreateBookRequestDto {
     private String title;
     private String author;

@@ -1,6 +1,7 @@
 package mate.academy.springbootwebdto.service;
 
 import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.springbootwebdto.dto.BookDto;
 import mate.academy.springbootwebdto.dto.CreateBookRequestDto;
@@ -10,15 +11,13 @@ import mate.academy.springbootwebdto.repository.BookRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class BookServiceImpl implements BookService {
 
-    BookRepository bookRepository;
-    BookMapper bookMapper;
+    private final BookRepository bookRepository;
+    private final BookMapper bookMapper;
 
     @Override
     public BookDto save(CreateBookRequestDto dto) {
@@ -29,7 +28,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookDto> findAll() {
-        return List.of();
+        return bookRepository.findAll().stream()
+                .map(bookMapper::toDto)
+                .toList();
     }
 
     @Override

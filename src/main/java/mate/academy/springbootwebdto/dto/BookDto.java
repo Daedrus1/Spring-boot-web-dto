@@ -1,9 +1,7 @@
 package mate.academy.springbootwebdto.dto;
 
-import jakarta.persistence.Column;
-import lombok.Data;
-
 import java.math.BigDecimal;
+import lombok.Data;
 
 @Data
 public class BookDto {

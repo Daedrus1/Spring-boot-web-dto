@@ -1,9 +1,8 @@
 package mate.academy.springbootwebdto.service;
 
+import java.util.List;
 import mate.academy.springbootwebdto.dto.BookDto;
 import mate.academy.springbootwebdto.dto.CreateBookRequestDto;
-
-import java.util.List;
 
 public interface BookService {
 
