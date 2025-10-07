@@ -9,10 +9,10 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface BookMapper {
 
-    @Mapping(target = "deleted", source = "isDeleted")
+    @Mapping(target = "deleted", source = "deleted")
     BookDto toDto(Book book);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "isDeleted", constant = "false")
+    @Mapping(target = "deleted", constant = "false")
     Book toModel(CreateBookRequestDto dto);
 }
