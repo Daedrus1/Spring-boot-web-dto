@@ -40,3 +40,6 @@ databaseChangeLog:
               - column:
                   name: cover_image
                   type: VARCHAR(500)
+              - column:
+                  name: Is_Deleted
+                  type: BOOLEAN
