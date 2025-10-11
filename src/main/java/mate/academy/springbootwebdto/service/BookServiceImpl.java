@@ -8,6 +8,7 @@ import mate.academy.springbootwebdto.dto.CreateBookRequestDto;
 import mate.academy.springbootwebdto.mapper.BookMapper;
 import mate.academy.springbootwebdto.model.Book;
 import mate.academy.springbootwebdto.repository.BookRepository;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,8 +27,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> findAll() {
-        return bookRepository.findAll().stream()
+    public List<BookDto> findAll(Pageable pageable) {
+        return bookRepository.findAll(pageable).stream()
                 .map(bookMapper::toDto)
                 .toList();
     }
