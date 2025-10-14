@@ -1,16 +1,19 @@
 package mate.academy.springbootwebdto.exception;
 
+import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -25,6 +28,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     ) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.BAD_REQUEST);
         List<String> errors = ex.getBindingResult().getAllErrors().stream()
                 .map(this::getErrorsMassage)
                 .toList();
@@ -40,6 +44,20 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             return fieldError + " " + message;
         }
         return e.getDefaultMessage();
+    }
+
+    public ResponseEntity<Object> handleEntityNotFound(
+            EntityNotFoundException ex,
+            WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.BAD_REQUEST);
+        body.put("error", "Resource not found");
+        body.put("message", ex.getMessage());
+        if (request instanceof ServletWebRequest swr) {
+            body.put("path", swr.getRequest().getRequestURI());
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
     }
 
 }

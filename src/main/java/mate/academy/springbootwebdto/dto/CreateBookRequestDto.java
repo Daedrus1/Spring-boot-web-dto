@@ -27,11 +27,9 @@ public class CreateBookRequestDto {
     @Digits(integer = 8, fraction = 2, message = "Price must have up to 8 digits and 2 decimals")
     private BigDecimal price;
 
-    @NotBlank(message = "Description is required")
     @Size(max = 2000, message = "Description must be ≤ 2000 characters")
     private String description;
 
-    @NotBlank(message = "Cover image URL is required")
     @URL(message = "Cover image must be a valid URL (http/https)")
     private String coverImage;
 }
