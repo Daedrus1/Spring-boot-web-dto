@@ -3,7 +3,11 @@ package mate.academy.springbootwebdto.mapper;
 import mate.academy.springbootwebdto.dto.BookDto;
 import mate.academy.springbootwebdto.dto.CreateBookRequestDto;
 import mate.academy.springbootwebdto.model.Book;
-import org.mapstruct.*;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring")
 public interface BookMapper {
