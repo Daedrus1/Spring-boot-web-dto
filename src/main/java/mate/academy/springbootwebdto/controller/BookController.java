@@ -2,6 +2,8 @@ package mate.academy.springbootwebdto.controller;
 
 import jakarta.validation.Valid;
 import java.util.List;
+
+import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import mate.academy.springbootwebdto.dto.BookDto;
 import mate.academy.springbootwebdto.dto.CreateBookRequestDto;
@@ -48,8 +50,8 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public BookDto update(@PathVariable @jakarta.validation.constraints.Positive long id,
-                          @RequestBody @jakarta.validation.Valid CreateBookRequestDto dto) {
+    public BookDto update(@PathVariable @Positive long id,
+                          @RequestBody @Valid CreateBookRequestDto dto) {
         return bookService.update(id, dto);
     }
 
